@@ -3,6 +3,7 @@
 #include <QSqlDatabase>
 #include <QDebug>
 #include <QSqlQuery>
+#include <QSqlQueryModel>
 
 class Database
 {
@@ -13,7 +14,7 @@ private:
 public:
     Database();
     void initTables();
-
+    QSqlQueryModel* getDishes();
 };
 
 #endif // DATABASE_H

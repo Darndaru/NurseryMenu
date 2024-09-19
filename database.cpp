@@ -7,6 +7,8 @@ Database::Database() {
     else qDebug("not opened");
 
     query = new QSqlQuery(db);
+
+    this->initTables();
 }
 
 void Database::initTables() {
@@ -75,5 +77,20 @@ void Database::initTables() {
                 "('горячий напиток', 'hot drink'), ('бутерброд', 'sandwich'),"
                 "('горячее блюдо', 'hot dish'), ('первое', 'entree')");
 
+    query->clear();
+    // checking that data is in the database
+    // QSqlQueryModel model;
+    // model.setQuery("select name from dish");
+    // model.fetchMore();
+    // QString first_row = model.data(model.index(0, 0)).toString();
+    // qDebug() << first_row;
+}
 
+
+QSqlQueryModel* Database::getDishes() {
+    QSqlQueryModel *dish_model = new QSqlQueryModel;
+    dish_model->setQuery("SELECT name FROM Dish");
+    while (dish_model->canFetchMore())
+        dish_model->fetchMore();
+    return dish_model;
 }
